@@ -1,0 +1,5 @@
+name: hotpotqa
+kind: multihop_qa
+path: data/raw/hotpotqa
+has_gold_evidence: true
+task_types: [multi_hop]

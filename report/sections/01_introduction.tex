@@ -1,0 +1,22 @@
+\section{Introduction}
+
+Large language models increasingly support long context windows, but a long
+input window does not guarantee robust use of relevant information. Prior work
+shows that models may fail when evidence is placed in the middle of a prompt,
+when distractors dominate the context, or when question and evidence have low
+lexical overlap.
+
+This project studies input-side long-context optimization. Given a question,
+a set of documents, and a token budget, the system must select, compress, and
+order evidence so that the downstream model can answer reliably.
+
+\paragraph{Goal.}
+Develop and evaluate a position-aware context packing method for improving
+long-context QA under fixed token budgets.
+
+\paragraph{Object.}
+Long-context processing in LLM-based QA systems.
+
+\paragraph{Subject.}
+Methods for selecting, compressing, and positioning evidence in long prompts
+under token budget constraints.

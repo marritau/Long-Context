@@ -1,0 +1,7 @@
+name: ruler
+kind: controlled
+path: data/raw/ruler
+context_lengths: [4096, 8192, 16384, 32768, 65536]
+task_types: [retrieval, multi_hop_tracing, aggregation]
+distractor_levels: [low, medium, high]
+has_gold_evidence: true

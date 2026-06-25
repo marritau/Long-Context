@@ -1,0 +1,6 @@
+name: nolima
+kind: controlled
+path: data/raw/nolima
+context_lengths: [1024, 4096, 8192, 16384, 32768]
+lexical_overlap: low
+has_gold_evidence: true

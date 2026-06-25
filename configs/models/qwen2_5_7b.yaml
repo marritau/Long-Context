@@ -1,0 +1,6 @@
+name: qwen2_5_7b_instruct
+provider: huggingface
+model_id: Qwen/Qwen2.5-7B-Instruct
+context_length: 131072
+max_new_tokens: 8192
+backend: vllm

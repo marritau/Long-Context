@@ -1,0 +1,5 @@
+name: multihop_rag
+kind: multi_document_rag
+path: data/raw/multihop_rag
+has_gold_evidence: true
+evidence_documents: [2, 3, 4]

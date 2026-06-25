@@ -1,0 +1,57 @@
+\section{Method}
+
+For a question $q$, documents $D$, chunks $C=\{c_i\}_{i=1}^{n}$, and budget $B$,
+PEARL builds an ordered evidence package $P$:
+
+\[
+P^* = \arg\max_P U(q,D,P)
+\]
+
+where utility combines relevance, evidence coverage, redundancy, position
+utility, and token cost.
+
+\subsection{Retrieval}
+
+PEARL combines BM25, dense retrieval, reranking, and structural signals:
+
+\[
+R_i =
+w_1 \hat{s}^{bm25}_i
++ w_2 \hat{s}^{dense}_i
++ w_3 \hat{s}^{ce}_i
++ w_4 \hat{s}^{struct}_i.
+\]
+
+\subsection{Evidence Graph}
+
+Chunks form a graph with semantic, adjacency, and section edges:
+
+\[
+A_{ij} =
+\eta_1 A_{ij}^{sem}
++ \eta_2 A_{ij}^{adj}
++ \eta_3 A_{ij}^{sec}.
+\]
+
+Personalized PageRank estimates bridge evidence:
+
+\[
+p^{(t+1)} = (1-\alpha)v + \alpha A^\top p^{(t)}.
+\]
+
+\subsection{Selection and Compression}
+
+MMR selection balances relevance, graph score, and redundancy. Query-aware
+compression keeps high-scoring sentences and their neighbors to protect bridge
+facts.
+
+\subsection{Position-aware Ordering}
+
+PEARL models lost-in-the-middle risk with:
+
+\[
+u(p)=1-\rho\sin^\kappa(\pi p).
+\]
+
+The most important chunks are assigned to the highest-utility positions near
+the beginning and end of the prompt.

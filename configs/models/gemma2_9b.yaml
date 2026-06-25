@@ -1,0 +1,5 @@
+name: gemma2_9b_control
+provider: huggingface
+model_id: google/gemma-2-9b-it
+context_length: 8192
+backend: transformers

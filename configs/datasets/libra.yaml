@@ -1,0 +1,6 @@
+name: libra
+kind: russian_long_context
+path: data/raw/libra
+context_lengths: [4096, 8192, 16384, 32768, 65536, 131072]
+has_gold_evidence: true
+status_note: "Optional extension; treat upstream repository status carefully."
