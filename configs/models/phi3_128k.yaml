@@ -1,5 +1,0 @@
-name: phi3_mini_128k_instruct
-provider: huggingface
-model_id: microsoft/Phi-3-mini-128k-instruct
-context_length: 131072
-backend: transformers

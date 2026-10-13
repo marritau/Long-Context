@@ -1,5 +1,0 @@
-experiment_name: nolima_overlap
-datasets: [nolima]
-budgets: [2048, 4096, 8192]
-methods: [bm25_topk, dense_topk, hybrid_rrf, pearl_full]
-metrics: [answer_accuracy, evidence_recall, lexical_overlap]

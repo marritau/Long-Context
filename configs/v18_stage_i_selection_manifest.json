@@ -1,0 +1,33 @@
+{
+  "samples": 24,
+  "sample_ids": [
+    "longbench-2wiki-6e020fda91702d5ab63283c032fc436f3a6b7fd6c568aba7",
+    "longbench-2wiki-8c17c1259ed0c31bff3ee48ef8a6c4c54469c7769ffbc1c1",
+    "longbench-2wiki-126e59f70d78a02c20e400e5b0ad54b85643c1d6bae5ac01",
+    "longbench-2wiki-14d2d8683a1b9eeec9c699b34d541076b43ecdd3eb37b30f",
+    "longbench-2wiki-14387a7ce67635d6f5c75fd29b6d3344758a8be64311ea6e",
+    "longbench-2wiki-3cd55b0826fed3ba2514f1f3477412ceb1d54c958b74d2a1",
+    "longbench-2wiki-1acac2b501c918db8649deb5d075095b32a6c6eab6541f69",
+    "longbench-2wiki-c37d17a5c509660a9c90556ef5c695867186af73a9ab4390",
+    "longbench-2wiki-6ed335d2f7555854fe36dce42f97d56693aba9a53fe82406",
+    "longbench-2wiki-e9a287057b6f318c6cef9d0e2b12256c7b9473f4b783d38d",
+    "longbench-2wiki-8e5c5292e42825f60d52f62ffc53006513725eb27a831c48",
+    "longbench-2wiki-f920e9270cd0ef6a7db5e9f31c830c591a4e6443084ad25d",
+    "longbench-2wiki-72b0975d7878f72d5b0142cf8e1551a8b8f124eaaa99a715",
+    "longbench-2wiki-b9995c8b89dd0bc26c2f2b4a77c7604ca4b60339b79a7744",
+    "longbench-2wiki-61fa50e62866fbeeffc9822aa76f8f363578e72c1a7436af",
+    "longbench-2wiki-62b8538f15d1af02f2e87a24e7ee549034906c5a870cac97",
+    "longbench-2wiki-d214078fd2eaaa345d77f1f06bbb7765253b476fec74d965",
+    "longbench-2wiki-214b402d003800d93cac0719cd79368392a320201cef08c9",
+    "longbench-2wiki-a7fc0716a3d94af7381c25a4e1c0eb2e697631de06c9ebb2",
+    "longbench-2wiki-512800a34732b97170358b8e1372c0f708126ae08372c441",
+    "longbench-2wiki-b6fdd8f9d56c029b83580e36d6b3642dbb387a9d60da03df",
+    "longbench-2wiki-4757e04814693a1a0ddc4c330f892f678a9c74bb49599efb",
+    "longbench-2wiki-3ec0722ff6e0d8361ed2ab093a992915fe5b1ddb10ee39a9",
+    "longbench-2wiki-883b4b8a680112178587dfb9511033c219999312a8e283e8"
+  ],
+  "selection_seed": 20261019,
+  "selection_offset": 0,
+  "source_revision": "0962550175777a5b10df401ca715e01c0bb3ee8d",
+  "source_sha256": "525b5b182089a4012cc7429c33f4208358778615173c4a09349429fc80c89641"
+}

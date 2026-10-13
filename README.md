@@ -1,110 +1,117 @@
-# PEARL: Long-Context Processing in Large Language Models
+# BIKV: сжатие KV-cache с учетом взаимодействий блоков
 
-Research project on long-context processing in large language models.
+Исследовательский код курсовой работы «Исследование обработки длинного контекста в больших языковых моделях».
 
-Working topic:
+Проект изучает, достаточно ли оценивать фрагменты длинного документа независимо или при ограниченном KV-cache необходимо учитывать связи между несколькими блоками. Основной протокол query-aware: диагностический проход вопроса используется только для построения признаков и полностью отбрасывается; затем сжимается cache документа, после чего модель впервые читает вопрос через уже сжатый cache.
 
-> Research and improvement of long-context usage in LLMs through query-aware
-> compression and position-aware context packing.
+## Что реализовано
 
-The repository implements an MVP of **PEARL**:
+- разбиение документа на равные token-блоки и выбор точного бюджета памяти;
+- query-aware unary-признаки, KNorm и признаки произвольных пар блоков;
+- matched unary Ridge и arbitrary-pair Ridge с одинаковыми candidate masks, target и регуляризацией;
+- shuffled-pair control для проверки вклада настоящего соответствия между блоками;
+- training-free `relation_graph`, распространяющий релевантность вопроса по редким лексическим связям;
+- matched-budget SnapKV в его собственном query-in-prefill протоколе;
+- атомарное сохранение результатов и возобновление расчета после отключения Colab;
+- family bootstrap для парных сравнений методов.
 
-**Position-aware Evidence Assembly for Reliable Long-context QA**.
+`relation_graph` является нашим диагностическим селектором, но не learned BIKV и не oracle: он использует только вопрос и текст блоков, без правильного ответа и без gold evidence. Его результаты следует приводить отдельно от learned pair-модели.
 
-PEARL treats long-context QA as an input-side optimization problem:
+## Эксперименты
+
+### Stage H: контролируемые цепочки
+
+Проверяются цепочки длины 2, 3 и 4 при соседнем и разнесенном размещении evidence. Документ содержит 42 блока, бюджет равен 6 блокам. Этот этап позволяет измерять сохранение полной цепочки, поскольку supporting blocks известны из генератора.
+
+Основной notebook:
+
+`notebooks/BIKV_V17_Stage_H_Chains_4k_Colab_Kaggle.ipynb`
+
+Дополнительная проверка переноса на RULER Variable Tracking:
+
+`notebooks/BIKV_V17_Stage_H_RULER_4k_Subset_Colab_Kaggle.ipynb`
+
+### Stage I: естественные данные
+
+Две заранее зафиксированные и непересекающиеся выборки LongBench-E 2WikiMultihopQA содержат по 24 естественных многодокументных вопроса. Документы имеют примерно 3--6 тыс. токенов Qwen. Основная метрика соответствует normalized answer F1 LongBench. Gold supporting blocks в стандартном LongBench-файле отсутствуют, поэтому support retention здесь намеренно не вычисляется.
+
+Notebooks:
+
+`notebooks/BIKV_V18_Stage_I_LongBench_2Wiki_Colab_Kaggle.ipynb`
+
+`notebooks/BIKV_V19_Stage_I_B_LongBench_2Wiki_Replication_Colab_Kaggle.ipynb`
+
+Stage I-B использует ранги 25--48 той же frozen-совокупности, проверяет отсутствие пересечения со Stage I и не переобучает селекторы после просмотра первой выборки.
+
+### Итоговые результаты
+
+На контролируемых цепочках arbitrary-pair BIKV повысил complete-chain retention на 30.6 п.п. относительно matched unary Ridge (95% CI `[11.1; 52.8]`). При этом прироста candidate accuracy не обнаружено: сохранение всей цепочки не всегда превращалось в правильный ответ слабого backbone.
+
+На объединённых 48 примерах LongBench-E получены следующие answer F1: full context 57.5%, relation graph 52.6%, SnapKV 51.8%, arbitrary-pair BIKV 51.7%, matched unary 48.5%, shuffled-pair control 25.5%. Разность BIKV с matched unary составила +3.2 п.п. (95% CI `[-10.7; 17.0]`), а с shuffled control +26.2 п.п. (95% CI `[13.5; 39.2]`). Поэтому работа подтверждает наличие полезного pair-сигнала, но не утверждает универсальное превосходство BIKV над unary и SnapKV.
+
+## Структура репозитория
 
 ```text
-question + documents + token budget
-  -> chunking
-  -> hybrid retrieval
-  -> evidence graph
-  -> MMR coverage selection
-  -> query-aware compression
-  -> position-aware ordering
-  -> prompt
+src/bikv/       библиотека: упаковка контекста, KV-прессы, признаки, граф и хранение результатов
+scripts/        финальные GPU-runner, анализаторы и подготовка внешних данных
+configs/        замороженные параметры экспериментов и веса линейных селекторов
+data/stage_h/   замороженный контролируемый набор цепочек и его аудит
+notebooks/      готовые Colab/Kaggle notebook для Stage H и Stage I
+docs/           зафиксированный дизайн и правила интерпретации этапов
+paper/          LaTeX-текст работы и provenance объединённой LongBench-таблицы
+tests/          CPU-тесты протокола, масок, метрик, графа и сохранения результатов
 ```
 
-The goal is not to train a new long-context model. The goal is to study how
-selection, compression, and placement of evidence affect answer quality,
-evidence recall, token cost, and position sensitivity.
+Промежуточные версии, скачанные модели, архивы запусков и экспериментальные результаты намеренно не включены в репозиторий.
 
-## Research Questions
+## Локальная проверка
 
-1. How strongly does answer quality depend on the position of evidence inside a
-   long prompt?
-2. Under a fixed token budget, when is full context worse than retrieval,
-   compression, or PEARL-style packing?
-3. Does PEARL stay robust when lexical overlap between question and evidence is
-   low?
-4. Does graph-based evidence coverage help multi-hop QA compared with plain
-   top-k retrieval?
-5. Can the same findings be transferred to Russian long-context tasks?
-
-## Repository Layout
-
-```text
-configs/          YAML configs for datasets, models, and experiments
-data/             raw, processed, index, and sample data folders
-src/pearl/        PEARL package
-scripts/          CLI helper scripts
-tests/            unit tests for the MVP core
-report/           LaTeX report skeleton
-results/          predictions, metrics, tables, and figures
-notebooks/        analysis notebooks placeholder
-```
-
-## Quick Start
+Требуется Python 3.10 или новее.
 
 ```bash
 python -m venv .venv
-. .venv/Scripts/activate  # Windows PowerShell: .venv\Scripts\Activate.ps1
-pip install -e .[dev]
+python -m pip install -e ".[dev]"
 python -m pytest
 ```
 
-Run a tiny local smoke experiment:
+GPU для unit-тестов не нужен. Полные эксперименты рассчитаны на NVIDIA T4 с 15--16 GB VRAM либо более мощную GPU.
+
+## Запуск в Colab
+
+Сначала соберите архив, который загружается соответствующим notebook:
 
 ```bash
-python -m pearl.experiments.run_experiment --config configs/default.yaml
+python scripts/build_stage_h_release.py
+python scripts/build_stage_i_release.py
+python scripts/build_stage_i_b_release.py
 ```
 
-The current implementation intentionally keeps the core runnable without model
-downloads. Dense retrieval and reranking have deterministic lightweight
-fallbacks; heavier backends such as SentenceTransformers, FlagEmbedding, vLLM,
-LLMLingua, and LongLLMLingua can be connected behind the wrapper modules.
+Затем:
 
-## Main Methods
+1. Откройте нужный notebook из `notebooks/`.
+2. Выберите GPU runtime.
+3. Выполните клетки сверху вниз и загрузите созданный ZIP при запросе.
+4. В Colab результаты зеркалируются в `MyDrive/bikv_runs` после каждого законченного примера.
+5. После отключения повторите ту же основную клетку: сохраненные строки и captures будут восстановлены и пропущены.
 
-Implemented MVP components:
+Stage I самостоятельно скачивает закрепленную ревизию LongBench-E. Stage H Chains использует включенный frozen-набор. RULER-проверка скачивает данные отдельным подготовительным скриптом из официального репозитория.
 
-- structure-aware chunking with token overlap;
-- BM25 lexical retrieval;
-- deterministic hashing-based dense retrieval fallback;
-- reciprocal rank fusion;
-- lightweight cross-encoder-style rerank fallback;
-- evidence graph with semantic, adjacency, and section edges;
-- personalized PageRank over evidence chunks;
-- MMR selection with redundancy penalty;
-- sentence-level query-aware compression with neighbor preservation;
-- position-aware context ordering using a lost-in-the-middle utility curve;
-- answer, evidence, cost, and position metrics.
+## Научная интерпретация
 
-Planned heavyweight baselines:
-
-- LongLLMLingua;
-- Selective Context;
-- BGE embeddings and reranker;
-- vLLM/Hugging Face generation runners.
-
-## MVP Experiment Plan
-
-The recommended first milestone:
+Главное сравнение learned-методов:
 
 ```text
-Datasets: RULER + NoLiMa
-Model: Qwen2.5-7B-Instruct or Phi-3-mini-128k
-Methods: full context, first-B, BM25, dense, hybrid rerank, PEARL-full
-Metrics: answer accuracy, evidence recall, token count, PSI, middle drop
+graph_arbitrary_pair_ridge_v1
+vs
+graph_matched_unary_ridge_v1
 ```
 
-Then add Qasper, ablations, budget sweep, and optional LIBRA/Russian evaluation.
+Оно изолирует pair-признаки: candidate pool, target, folds, модель Ridge и регуляризация совпадают. Дополнительно настоящая pair-модель сравнивается с `graph_pair_shuffled_v1`.
+
+Успех `relation_graph` при неудаче learned pair-модели означает не победу обученного BIKV, а более узкий механистический результат: для распределенных цепочек явная связность может быть полезнее агрегированных признаков второго порядка.
+
+Проект не утверждает, что pair-aware селектор универсально превосходит SnapKV. Цель работы состоит в сравнении индивидуальной, парной и графовой важности фрагментов при обработке длинного контекста и в установлении условий, при которых каждый подход работает или перестает работать.
+
+## Текущее состояние
+
+Код метода, экспериментальный протокол и запланированные GPU-прогоны завершены. В репозитории находятся замороженные конфигурации, manifests выборок, notebooks для воспроизведения и итоговый LaTeX-текст. Архивы сырых запусков не включены из-за размера; агрегированные числа и их provenance зафиксированы в `paper/LONGBENCH_COMBINED_48.md`.

@@ -1,0 +1,41 @@
+{
+  "samples": 24,
+  "sample_ids": [
+    "longbench-2wiki-6967a9e68d49dd2ad975640d7f7f3d658d75a1c46b68c602",
+    "longbench-2wiki-5f9a67c086d5912df85495d94281982fd5bc0abe67c3d266",
+    "longbench-2wiki-d222c2ad4ec9ae9a46900e5d0cc6653c72760ed24077b7fa",
+    "longbench-2wiki-54a23d6cb838dd2a56c1ef30e4b4ecf742735f659c470879",
+    "longbench-2wiki-4015ec843357a57ba15b7c35c8009145d500a305dbd67416",
+    "longbench-2wiki-c67a466a8e3d23bf26e8943352ef9239007495c8bd6febec",
+    "longbench-2wiki-e2f6373f7d78bc79306ca8454e38329e511a920f224a26f4",
+    "longbench-2wiki-8e33b783534c90d43c07617f4106a5056cb93ba21758b91c",
+    "longbench-2wiki-0df95375e082998e11c14660675ca1d4d28cbf40c094fa47",
+    "longbench-2wiki-313350f4cf6f6589899303d892f49d9f83a79df302126841",
+    "longbench-2wiki-37eb33998e8bd7ffe40969ac3161ad695983fcf651dac639",
+    "longbench-2wiki-7a0b2aa530cd3c6c74154e334e96c8aae27f68fa12d65bb1",
+    "longbench-2wiki-89c07ef3f30f2e55bae0db0e61b73f9213bf9cac755d3add",
+    "longbench-2wiki-4eb5e12b259e10e05b72f9afe6c05e40bf42a1911896e417",
+    "longbench-2wiki-dde2c006bfa530403e8c9bafc6497d0e65aad8cf1b6813ee",
+    "longbench-2wiki-4bc4e1176125b7f02876ca7fe1a08ec4d69b220e5a43f36f",
+    "longbench-2wiki-67153c83335bef7039781a9416b3497c9dcf884dcd7bda0b",
+    "longbench-2wiki-0e1a7715016522e4285d6db621310d72b3db49464271cf47",
+    "longbench-2wiki-b18a8d110828baf5ddd8cb6c3f7bc31fa54f8e47523cf13f",
+    "longbench-2wiki-ec96dad9bf806f1c5597178f476df39ad6603170efabe914",
+    "longbench-2wiki-16b98a59e06d1c72b4da73f79e5c99f936e8c2fdbee29a0b",
+    "longbench-2wiki-5ea1b7cf56629956855b229046acb45cc77f03b262ce7aaa",
+    "longbench-2wiki-448ddfeb3a427402454dcd05d7b41bd39204415877001ebb",
+    "longbench-2wiki-51abb90e2dff9602a1fc42256819bf66b0c6b4746a872307"
+  ],
+  "document_tokens": [
+    3843, 5960, 4601, 4279, 4916, 5486, 5080, 4701, 5612, 5806, 4712, 3703,
+    3269, 4558, 5009, 4780, 4263, 5446, 5723, 4388, 5420, 5868, 5649, 4434
+  ],
+  "block_counts": [
+    41, 63, 48, 45, 52, 58, 53, 49, 59, 61, 50, 39,
+    35, 48, 53, 50, 45, 57, 60, 46, 57, 62, 59, 47
+  ],
+  "selection_seed": 20261019,
+  "selection_offset": 24,
+  "source_revision": "0962550175777a5b10df401ca715e01c0bb3ee8d",
+  "source_sha256": "525b5b182089a4012cc7429c33f4208358778615173c4a09349429fc80c89641"
+}

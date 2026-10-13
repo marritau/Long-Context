@@ -1,5 +1,0 @@
-experiment_name: position_sensitivity
-datasets: [ruler, nolima]
-evidence_positions: [0.0, 0.1, 0.25, 0.5, 0.75, 0.9, 1.0]
-methods: [full_context, random_order, relevance_desc, pearl_ordering]
-metrics: [answer_score, psi, middle_drop]

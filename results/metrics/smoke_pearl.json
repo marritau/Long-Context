@@ -1,9 +1,0 @@
-{
-  "example_id": "smoke_001",
-  "method": "pearl_full",
-  "num_chunks": 1,
-  "total_tokens": 77,
-  "compression_ratio": 1.0,
-  "evidence_recall": 1.0,
-  "prompt_preview": "You are given a question and a set of evidence excerpts.\nAnswer using only the evidence.\nIf the evidence is insufficient, say that the answer is not supported.\n\nQuestion:\nHow does PEARL improve long-context QA?\n\nEvidence:\n[1] The report opens with background on long-context language models. Several distractor paragraphs discuss training hardware and unrelated datasets. PEARL improves long-context QA by selecting evidence, compressing it, and placing important facts near prompt edges. Another par"
-}

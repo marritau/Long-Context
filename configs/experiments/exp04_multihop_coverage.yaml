@@ -1,4 +1,0 @@
-experiment_name: multihop_coverage
-datasets: [ruler, hotpotqa, multihop_rag]
-methods: [hybrid_rrf, hybrid_rerank, pearl_rg, pearl_full]
-metrics: [answer_f1, evidence_recall, all_hop_recall, partial_hop_recall]

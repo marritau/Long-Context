@@ -1,4 +1,0 @@
-experiment_name: compression_budget
-datasets: [qasper, nolima]
-compression_ratios: [1.0, 0.75, 0.5, 0.25, 0.125]
-methods: [no_compression, selective_context, llmlingua, longllmlingua, pearl_query_aware]

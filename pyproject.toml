@@ -3,49 +3,35 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "long-context-pearl"
-version = "0.1.0"
-description = "PEARL: position-aware evidence assembly for reliable long-context QA."
-readme = "README.md"
+name = "boundary-interaction-kv"
+version = "0.19.0"
+description = "Interaction-aware KV-cache compression for long-context evidence chains"
 requires-python = ">=3.10"
-authors = [{ name = "HSE Long-Context Research" }]
 dependencies = [
-  "numpy>=1.24",
-  "pandas>=2.0",
-  "pyyaml>=6.0",
-  "tqdm>=4.66",
+  "kvpress==0.5.5",
+  "numpy>=1.26,<2; python_version < '3.13'",
+  "numpy>=2.1,<3; python_version >= '3.13'",
+  "torch>=2.3.1,<3",
+  "transformers==4.57.6",
+  "accelerate>=1,<2",
+  "scikit-learn>=1.5,<2",
+  "scipy>=1.13,<2",
+  "tqdm>=4.66,<5",
+  "matplotlib>=3.9,<4",
 ]
 
 [project.optional-dependencies]
-retrieval = [
-  "rank-bm25>=0.2.2",
-  "sentence-transformers>=2.7",
-  "faiss-cpu>=1.8",
-  "FlagEmbedding>=1.2",
-]
-generation = [
-  "torch",
-  "transformers",
-  "accelerate",
-  "vllm",
-]
-metrics = [
-  "evaluate",
-  "rouge-score",
-  "sacrebleu",
-]
-dev = [
-  "pytest>=8.0",
-  "ruff>=0.5",
-]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+bikv = "bikv.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
-
-[tool.ruff]
-line-length = 100
-target-version = "py310"
+addopts = "-q"

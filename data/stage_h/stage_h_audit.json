@@ -1,0 +1,16 @@
+{
+  "stories": 36,
+  "families": 18,
+  "strata": {
+    "h2_adjacent": 3,
+    "h2_dispersed": 3,
+    "h3_adjacent": 3,
+    "h3_dispersed": 3,
+    "h4_adjacent": 3,
+    "h4_dispersed": 3
+  },
+  "seed": 20261018,
+  "n_blocks": 42,
+  "sha256": "a674a6570ed13208789787b1112d30a5acf106610eb5f41dd26a40b3dedb9c15",
+  "path": "stage_h_chains_4k.jsonl"
+}

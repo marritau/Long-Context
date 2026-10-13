@@ -1,5 +1,0 @@
-name: qasper
-kind: real_qa
-path: data/raw/qasper
-has_gold_evidence: true
-task_types: [scientific_document_qa]

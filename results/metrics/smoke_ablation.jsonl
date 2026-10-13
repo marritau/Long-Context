@@ -1,5 +1,0 @@
-{"method": "pearl_r", "num_chunks": 1, "tokens": 77, "compression_ratio": 1.0, "ordering": "document"}
-{"method": "pearl_rg", "num_chunks": 1, "tokens": 77, "compression_ratio": 1.0, "ordering": "document"}
-{"method": "pearl_rgc", "num_chunks": 1, "tokens": 77, "compression_ratio": 1.0, "ordering": "document"}
-{"method": "pearl_rgo", "num_chunks": 1, "tokens": 77, "compression_ratio": 1.0, "ordering": "pearl"}
-{"method": "pearl_full", "num_chunks": 1, "tokens": 77, "compression_ratio": 1.0, "ordering": "pearl"}
