@@ -1,0 +1,33 @@
+{
+  "run_id": "bikv-v15-g2-ruler-qualification-seed-20261016",
+  "seed": 20261016,
+  "model_name": "Qwen/Qwen2.5-3B-Instruct",
+  "attention_implementation": "sdpa",
+  "trust_remote_code": false,
+  "use_chat_template": true,
+  "n_stories": 50,
+  "n_blocks": 84,
+  "block_size": 96,
+  "budget_blocks": 6,
+  "feature_skip_first_layers": 2,
+  "max_new_tokens": 8,
+  "frozen_models_path": "configs/v14_g1b_g2_frozen_models.json",
+  "data_path": "data/v15_ruler/vt_4096/validation.jsonl",
+  "ruler_manifest_path": "data/v15_ruler/ruler_manifest.json",
+  "ruler_datasets": {
+    "4096": "data/v15_ruler/vt_4096/validation.jsonl",
+    "8192": "data/v15_ruler/vt_8192/validation.jsonl"
+  },
+  "ruler_samples_per_length": 50,
+  "ruler_budget_blocks": 6,
+  "ruler_max_new_tokens": 64,
+  "ruler_min_full_reference_recall": 0.5,
+  "ruler_qualification_only": true,
+  "run_g1b": false,
+  "run_g2": true,
+  "output_root": "runs",
+  "mirror_root": null,
+  "max_gpu_minutes": 285,
+  "shutdown_reserve_minutes": 15,
+  "bundle_every_samples": 2
+}

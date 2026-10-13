@@ -1,0 +1,48 @@
+{
+  "seed": 20261018,
+  "stories_per_length": 96,
+  "lengths": {
+    "21": {
+      "path": "data\\v15_g1b_confirmation\\g1b_021_blocks.jsonl",
+      "sha256": "9cb609442f5be761e0a59ed5cc864c142f5685c60c4d8a2235812d25d9e913cc",
+      "stories": 96,
+      "families": 48,
+      "conditions": {
+        "adjacent": 80,
+        "separated": 16
+      },
+      "min_support_position": 0,
+      "max_support_position": 20,
+      "covered_support_positions": 21,
+      "audit_target_lab_mentions": 0
+    },
+    "42": {
+      "path": "data\\v15_g1b_confirmation\\g1b_042_blocks.jsonl",
+      "sha256": "9c4e73033d888aeaff8d434c9099a9e1d91bda15750e00f75ad5914d104bdc3d",
+      "stories": 96,
+      "families": 48,
+      "conditions": {
+        "adjacent": 80,
+        "separated": 16
+      },
+      "min_support_position": 0,
+      "max_support_position": 41,
+      "covered_support_positions": 42,
+      "audit_target_lab_mentions": 0
+    },
+    "84": {
+      "path": "data\\v15_g1b_confirmation\\g1b_084_blocks.jsonl",
+      "sha256": "fafb977a7f9a5a7ac84bf01be02dfaacbc12ae726c08fdce9054bc59ede00bd6",
+      "stories": 96,
+      "families": 48,
+      "conditions": {
+        "separated": 16,
+        "adjacent": 80
+      },
+      "min_support_position": 0,
+      "max_support_position": 83,
+      "covered_support_positions": 77,
+      "audit_target_lab_mentions": 0
+    }
+  }
+}
